@@ -1,4 +1,4 @@
-// Solving date: 25-8-2025 22:30
+// Solving date: 25-8-2025 22:30 CET
 const fs = require('fs');
 let potions = 0;
 

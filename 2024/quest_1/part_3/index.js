@@ -1,15 +1,20 @@
-// Solving date: 25-8-2025 23:03 CET
+// Solving date: 25-8-2025 23:28 CET
 const fs = require('fs');
 let potions = 0;
 let enemies;
+let enemiesInGroup;
 
 const input = fs.readFileSync('input.txt').toString().split('');
-for (let i = 0; i < input.length; i += 2) {
-    enemies = [input[i], input[i + 1]];
+for (let i = 0; i < input.length; i += 3) {
+    enemies = [input[i], input[i + 1], input[i + 2]];
+    enemiesInGroup = 3;
+    enemies.forEach(enemy => {
+        if (enemy === 'x') enemiesInGroup--
+    })
 
-    if (enemies[0] === 'x' && enemies[1] === 'x') continue;
+    if (enemiesInGroup === 0) continue;
 
-    if (enemies.includes('x')) {
+    if (enemiesInGroup === 1) {
         enemies.forEach(enemy => {
             switch (enemy) {
                 case 'B':
@@ -23,7 +28,7 @@ for (let i = 0; i < input.length; i += 2) {
                     break;
             }
         })
-    } else {
+    } else if (enemiesInGroup === 2) {
         enemies.forEach(enemy => {
             switch (enemy) {
                 case 'A':
@@ -37,6 +42,23 @@ for (let i = 0; i < input.length; i += 2) {
                     break;
                 case 'D':
                     potions += 6;
+                    break;
+            }
+        })
+    } else {
+        enemies.forEach(enemy => {
+            switch (enemy) {
+                case 'A':
+                    potions += 2;
+                    break;
+                case 'B':
+                    potions += 3;
+                    break;
+                case 'C':
+                    potions += 5;
+                    break;
+                case 'D':
+                    potions += 7;
                     break;
             }
         })
